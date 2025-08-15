@@ -5,6 +5,11 @@ import uvicorn
 from datetime import datetime
 import threading
 import time
+import os
+from dotenv import load_dotenv
+
+# 載入環境變數
+load_dotenv()
 
 app = FastAPI()
 
@@ -12,9 +17,9 @@ app = FastAPI()
 driver_instance = None
 driver_lock = threading.Lock()
 
-BOOKING_URL = "https://booking.cathayholdings.com/frontend/mrm101w/index?"
-USERNAME = "00897772"
-PASSWORD = "Cz@832789239"
+BOOKING_URL = os.getenv("BOOKING_URL", "https://booking.cathayholdings.com/frontend/mrm101w/index?")
+USERNAME = os.getenv("BOOKING_USERNAME")
+PASSWORD = os.getenv("BOOKING_PASSWORD")
 
 def create_driver():
     options = webdriver.ChromeOptions()
